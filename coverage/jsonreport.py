@@ -131,6 +131,9 @@ class JsonReporter:
                 _convert_branch_arcs(analysis.missing_branch_arcs()),
             )
 
+        if not self.config.emit_regions:
+            return reported_file
+
         num_lines = len(file_reporter.source().splitlines())
         regions = file_reporter.code_regions()
         for noun, plural in file_reporter.code_region_kinds():

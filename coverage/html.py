@@ -403,7 +403,8 @@ class HtmlReporter:
         self.write_file_index_page(first_html, final_html)
 
         # Write function and class index pages.
-        self.write_region_index_pages(files_to_report)
+        if self.config.emit_regions:
+            self.write_region_index_pages(files_to_report)
 
         return (
             self.index_pages["file"].totals.n_statements

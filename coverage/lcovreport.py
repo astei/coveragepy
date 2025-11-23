@@ -212,7 +212,8 @@ class LcovReporter:
             source_lines = []
 
         lcov_lines(analysis, lines, source_lines, outfile)
-        lcov_functions(fr, analysis, outfile)
+        if self.config.emit_regions:
+            lcov_functions(fr, analysis, outfile)
         if analysis.has_arcs:
             lcov_arcs(fr, analysis, lines, outfile)
 
