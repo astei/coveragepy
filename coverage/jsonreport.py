@@ -6,7 +6,6 @@
 from __future__ import annotations
 
 import datetime
-import json
 import sys
 from collections.abc import Iterable
 from typing import IO, TYPE_CHECKING, Any
@@ -20,6 +19,11 @@ if TYPE_CHECKING:
     from coverage import Coverage
     from coverage.data import CoverageData
     from coverage.plugin import FileReporter
+
+try:
+    import orjson as json
+except ImportError:
+    import json
 
 
 # A type for data that can be JSON-serialized.
@@ -102,7 +106,7 @@ class JsonReporter:
         json.dump(
             self.report_data,
             outfile,
-            indent=(4 if self.config.json_pretty_print else None),
+            # indent=(4 if self.config.json_pretty_print else None),
         )
 
         return self.total.n_statements and self.total.pc_covered
